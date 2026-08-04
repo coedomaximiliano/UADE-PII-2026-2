@@ -16,4 +16,5 @@ tps/
 
 ## Cómo subir tu código
 
-Ver [CONTRIBUTING.md](CONTRIBUTING.md) para el flujo de fork + pull request.
+- **¿Primera vez usando Git?** Seguí la [guía paso a paso para alumnos](GUIA-ALUMNOS.md).
+- Si ya sabés usar Git, el flujo resumido está en [CONTRIBUTING.md](CONTRIBUTING.md).
