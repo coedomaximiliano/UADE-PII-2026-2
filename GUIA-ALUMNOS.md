@@ -155,6 +155,33 @@ Repitan los pasos 2 a 5 cada sesión de trabajo. El paso 2 (`pull` antes de empe
 
 *Si usan GitHub Desktop, es el mismo flujo con los botones equivalentes: **Fetch origin / Pull origin** antes de programar, y **Commit** + **Push origin** después de cada avance.*
 
+### Si te aparece un conflicto al hacer `pull`
+
+Pasa cuando vos y un compañero modificaron las mismas líneas de un mismo archivo. Git no elige por ustedes — hay que resolverlo a mano:
+
+1. Después de correr `git pull origin tpN-grupoN`, git va a avisar que hay un conflicto y va a marcar el/los archivo(s) afectado(s).
+2. Abrí el archivo en conflicto. Vas a ver algo así:
+   ```
+   <<<<<<< HEAD
+   tu versión del código
+   =======
+   la versión de tu compañero
+   >>>>>>> tpN-grupoN
+   ```
+3. Editá el archivo a mano: dejá el código que corresponda (el tuyo, el de tu compañero, o una combinación de ambos) y borrá las marcas `<<<<<<<`, `=======` y `>>>>>>>`.
+4. Guardá el archivo y marcá el conflicto como resuelto:
+   ```
+   git add tps/tpN/grupoN
+   git commit
+   ```
+   (git arma un mensaje de commit por default para el merge; con aceptarlo alcanza)
+5. Ahora sí, subí los cambios:
+   ```
+   git push origin tpN-grupoN
+   ```
+
+Si no están seguros de qué versión dejar, hablen por fuera de git (WhatsApp, en persona) antes de resolver — es más rápido que adivinar.
+
 ---
 
 ## Si tenés que corregir algo después de entregar
