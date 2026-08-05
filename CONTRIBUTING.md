@@ -1,39 +1,39 @@
 # Cómo contribuir
 
-Cada alumno sube su código mediante fork + pull request. Nadie tiene permiso de escritura directa sobre este repositorio.
+Cada grupo sube su código mediante fork + pull request. Nadie tiene permiso de escritura directa sobre este repositorio.
 
 ## Pasos
 
-1. **Fork**: hacé fork de este repositorio a tu cuenta de GitHub (botón "Fork" arriba a la derecha).
+1. **Fork**: un integrante del grupo hace fork de este repositorio a su cuenta de GitHub (botón "Fork" arriba a la derecha), y agrega al resto del grupo como colaboradores de su fork (`Settings > Collaborators`).
 
-2. **Cloná tu fork**:
+2. **Cloná el fork del grupo**:
    ```
    git clone https://github.com/TU-USUARIO/UADE-PII-2026-2.git
    cd UADE-PII-2026-2
    ```
 
-3. **Creá tu carpeta** dentro del trabajo práctico correspondiente:
+3. **Creá la carpeta de tu grupo** dentro del trabajo práctico correspondiente:
    ```
-   tps/tpN/apellido-nombre/
+   tps/tpN/grupoN/
    ```
-   Reemplazá `tpN` por el número de TP y `apellido-nombre` por tu apellido y nombre (todo en minúsculas, separado por guiones).
+   Reemplazá `tpN` por el número de TP y `grupoN` por el número de tu grupo (ej: `grupo3`).
 
-4. **Creá una rama** para tu entrega:
+4. **Creá una rama** para la entrega del grupo:
    ```
-   git checkout -b tpN-apellido-nombre
+   git checkout -b tpN-grupoN
    ```
 
 5. **Commiteá y pusheá** a tu fork:
    ```
-   git add tps/tpN/apellido-nombre
-   git commit -m "TPN: apellido nombre"
-   git push origin tpN-apellido-nombre
+   git add tps/tpN/grupoN
+   git commit -m "TPN: GrupoN"
+   git push origin tpN-grupoN
    ```
 
-6. **Abrí un Pull Request** desde tu fork hacia `coedomaximiliano/UADE-PII-2026-2` (rama `main`).
+6. **Abrí un Pull Request** desde el fork del grupo hacia `coedomaximiliano/UADE-PII-2026-2` (rama `main`).
 
 ## Reglas
 
-- Subí código **únicamente** dentro de tu propia carpeta. No modifiques archivos de otros alumnos.
-- Un PR por entrega/trabajo práctico.
-- El título del PR debe indicar el TP y tu nombre, ej: `TP1: Pérez Juan`.
+- Subí código **únicamente** dentro de la carpeta de tu propio grupo. No modifiques archivos de otros grupos.
+- **Un solo PR por grupo y por entrega**: coordínense entre los integrantes para no pisarse. Correcciones posteriores van como nuevos commits en la misma rama, no un PR nuevo.
+- El título del PR debe indicar el TP y el grupo, ej: `TP1: Grupo3`.

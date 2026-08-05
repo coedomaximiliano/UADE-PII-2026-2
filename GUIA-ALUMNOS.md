@@ -1,4 +1,4 @@
-# Guía paso a paso: cómo subir tu TP (primera vez con Git)
+# Guía paso a paso: cómo subir el TP de tu grupo (primera vez con Git)
 
 Esta guía es para quienes nunca usaron Git ni GitHub. Vas a necesitar una cuenta de GitHub (gratis) y tener Git instalado en tu computadora.
 
@@ -14,47 +14,58 @@ Hay dos caminos: **GitHub Desktop** (con interfaz gráfica, más fácil para emp
 
 ---
 
+## 1. Organización del grupo
+
+Las entregas son por grupo: **un solo fork y una sola rama por grupo**, no uno por cada integrante. Antes de empezar, pónganse de acuerdo:
+
+- **Un integrante hace el fork** del repositorio (pasos más abajo).
+- Ese integrante agrega a sus compañeros como colaboradores de su fork: en su fork en GitHub, `Settings > Collaborators > Add people`, buscando el usuario de GitHub de cada compañero.
+- Con eso, todos los integrantes pueden clonar el mismo fork y pushear a la misma rama. Avisen en el grupo antes de pushear si están trabajando en simultáneo, para no pisarse.
+
+---
+
 ## Camino A: con GitHub Desktop (recomendado si es tu primera vez)
 
-### 1. Hacé fork del repositorio
+### 1. Hacé fork del repositorio (solo un integrante del grupo)
 
 1. Andá a https://github.com/coedomaximiliano/UADE-PII-2026-2
 2. Hacé click en el botón **Fork** (arriba a la derecha).
 3. Confirmá con **Create fork**. Ahora tenés tu propia copia en `https://github.com/TU-USUARIO/UADE-PII-2026-2`.
+4. Agregá a tus compañeros de grupo como colaboradores de tu fork (`Settings > Collaborators`).
 
-### 2. Cloná tu fork con GitHub Desktop
+### 2. Cloná el fork del grupo con GitHub Desktop
 
 1. Abrí GitHub Desktop e iniciá sesión con tu cuenta de GitHub (`File > Options > Sign in`).
 2. `File > Clone repository`.
-3. Elegí tu fork `TU-USUARIO/UADE-PII-2026-2` de la lista y una carpeta local donde guardarlo. Click en **Clone**.
+3. Elegí el fork del grupo (`TU-USUARIO/UADE-PII-2026-2`, donde `TU-USUARIO` es el usuario de quien hizo el fork) y una carpeta local donde guardarlo. Click en **Clone**.
 
-### 3. Creá tu carpeta y agregá tus archivos
+### 3. Creá la carpeta del grupo y agreguen sus archivos
 
 1. Abrí la carpeta local del repo (en GitHub Desktop: `Repository > Show in Explorer`).
-2. Entrá a `tps/tpN/` (reemplazá `N` por el número del trabajo práctico que estás entregando).
-3. Creá una carpeta con tu apellido y nombre en minúsculas, separado por guion, por ejemplo `tps/tp1/perez-juan/`.
-4. Copiá ahí tus archivos del TP.
+2. Entrá a `tps/tpN/` (reemplazá `N` por el número del trabajo práctico que están entregando).
+3. Creá una carpeta con el número de grupo, por ejemplo `tps/tp1/grupo3/`.
+4. Copien ahí los archivos del TP (todos los integrantes trabajan sobre la misma carpeta).
 
 ### 4. Creá una rama
 
 1. En GitHub Desktop, arriba dice "Current branch". Click ahí y luego **New branch**.
-2. Nombrala `tpN-apellido-nombre` (ej: `tp1-perez-juan`).
+2. Nombrala `tpN-grupoN` (ej: `tp1-grupo3`).
 3. Click en **Create branch**.
 
 ### 5. Commit y push
 
 1. GitHub Desktop va a mostrar los archivos nuevos que agregaste (columna izquierda).
-2. Abajo a la izquierda, escribí un mensaje de commit, ej: `TP1: Pérez Juan`.
-3. Click en **Commit to tp1-perez-juan**.
-4. Arriba a la derecha, click en **Push origin** (esto sube los cambios a tu fork en GitHub).
+2. Abajo a la izquierda, escribí un mensaje de commit, ej: `TP1: Grupo3`.
+3. Click en **Commit to tp1-grupo3**.
+4. Arriba a la derecha, click en **Push origin** (esto sube los cambios al fork del grupo en GitHub).
 
-### 6. Abrí el Pull Request
+### 6. Abrí el Pull Request (una sola vez por grupo)
 
-1. En GitHub Desktop aparece un botón **Create Pull Request** después del push (o entrá a tu fork en github.com).
+1. En GitHub Desktop aparece un botón **Create Pull Request** después del push (o entrá al fork en github.com).
 2. Se abre GitHub en el navegador. Verificá que:
    - **base repository**: `coedomaximiliano/UADE-PII-2026-2`, rama `main`
-   - **head repository**: `TU-USUARIO/UADE-PII-2026-2`, rama `tpN-apellido-nombre`
-3. Título del PR: `TP1: Pérez Juan` (número de TP + tu nombre).
+   - **head repository**: `TU-USUARIO/UADE-PII-2026-2`, rama `tpN-grupoN`
+3. Título del PR: `TP1: Grupo3` (número de TP + número de grupo).
 4. Click en **Create pull request**.
 
 ¡Listo! Ya está entregado. El docente va a revisar y puede pedir cambios o aprobarlo.
@@ -70,67 +81,69 @@ git config --global user.name "Tu Nombre"
 git config --global user.email "tu-email@ejemplo.com"
 ```
 
-### 2. Hacé fork del repositorio
+### 2. Hacé fork del repositorio (solo un integrante del grupo)
 
 1. Andá a https://github.com/coedomaximiliano/UADE-PII-2026-2
 2. Click en **Fork** (arriba a la derecha) y confirmá con **Create fork**.
+3. Agregá a tus compañeros como colaboradores del fork (`Settings > Collaborators`).
 
-### 3. Cloná tu fork
+### 3. Cloná el fork del grupo
 
 ```
 git clone https://github.com/TU-USUARIO/UADE-PII-2026-2.git
 cd UADE-PII-2026-2
 ```
 
-(Reemplazá `TU-USUARIO` por tu usuario de GitHub)
+(Reemplazá `TU-USUARIO` por el usuario de quien hizo el fork del grupo)
 
-### 4. Creá una rama para tu entrega
+### 4. Creá una rama para la entrega del grupo
 
 ```
-git checkout -b tp1-perez-juan
+git checkout -b tp1-grupo3
 ```
 
-(Reemplazá `tp1-perez-juan` por `tpN-apellido-nombre` según corresponda)
+(Reemplazá `tp1-grupo3` por `tpN-grupoN` según corresponda)
 
-### 5. Creá tu carpeta y agregá tus archivos
+### 5. Creá la carpeta del grupo y agreguen sus archivos
 
-Creá la carpeta `tps/tp1/perez-juan/` (con el número de TP y tu apellido-nombre) y copiá ahí tus archivos.
+Creá la carpeta `tps/tp1/grupo3/` (con el número de TP y el número de grupo) y copien ahí los archivos, entre todos los integrantes.
 
 ### 6. Agregá, commiteá y pusheá los cambios
 
 ```
-git add tps/tp1/perez-juan
-git commit -m "TP1: Perez Juan"
-git push origin tp1-perez-juan
+git add tps/tp1/grupo3
+git commit -m "TP1: Grupo3"
+git push origin tp1-grupo3
 ```
 
 La primera vez que hagas `push` es posible que se abra una ventana del navegador pidiéndote iniciar sesión en GitHub. Iniciá sesión y el push va a continuar solo.
 
-### 7. Abrí el Pull Request
+### 7. Abrí el Pull Request (una sola vez por grupo)
 
-1. Terminada la push, la terminal te va a mostrar un link para crear el Pull Request (o entrá a tu fork en github.com, va a aparecer un botón **Compare & pull request**).
+1. Terminada la push, la terminal te va a mostrar un link para crear el Pull Request (o entrá al fork en github.com, va a aparecer un botón **Compare & pull request**).
 2. Verificá que la base sea `coedomaximiliano/UADE-PII-2026-2` rama `main`.
-3. Título del PR: `TP1: Perez Juan`.
+3. Título del PR: `TP1: Grupo3`.
 4. Click en **Create pull request**.
 
 ---
 
 ## Si tenés que corregir algo después de entregar
 
-No hace falta abrir un PR nuevo: alcanza con modificar los archivos en tu carpeta local, y repetir el `commit` + `push` en la **misma rama**. El Pull Request se actualiza solo con los nuevos cambios.
+No hace falta abrir un PR nuevo: alcanza con modificar los archivos en la carpeta local, y repetir el `commit` + `push` en la **misma rama**. El Pull Request se actualiza solo con los nuevos cambios. Si son varios integrantes pusheando, avisen en el grupo antes de hacer `push` para no pisarse.
 
 ```
-git add tps/tp1/perez-juan
+git add tps/tp1/grupo3
 git commit -m "TP1: correcciones"
-git push origin tp1-perez-juan
+git push origin tp1-grupo3
 ```
 
 ---
 
 ## Problemas comunes
 
-- **"Nombre de carpeta ya existe" o error al abrir PR**: asegurate de no haber tocado archivos fuera de tu propia carpeta.
-- **No me aparece el botón "Create pull request"**: entrá directamente a `https://github.com/TU-USUARIO/UADE-PII-2026-2/pull/new/tpN-apellido-nombre`.
+- **"Nombre de carpeta ya existe" o error al abrir PR**: asegurate de no haber tocado archivos fuera de la carpeta de tu grupo.
+- **No me aparece el botón "Create pull request"**: entrá directamente a `https://github.com/TU-USUARIO/UADE-PII-2026-2/pull/new/tpN-grupoN`.
 - **Me pide usuario y contraseña y falla**: GitHub ya no acepta contraseña por línea de comandos. Dejá que se abra la ventana del navegador para iniciar sesión (Git Credential Manager), o usá GitHub Desktop.
+- **No puedo pushear al fork de mi compañero**: pedile que te agregue como colaborador en `Settings > Collaborators` de su fork.
 
 Ante cualquier duda, consultá al docente antes de la fecha límite de entrega.

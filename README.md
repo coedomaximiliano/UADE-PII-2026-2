@@ -4,15 +4,18 @@ Repositorio público de la cátedra para que los alumnos suban el código de sus
 
 ## Organización
 
-El código se organiza por trabajo práctico y, dentro de cada uno, por alumno:
+El código se organiza por trabajo práctico y, dentro de cada uno, por grupo:
 
 ```
 tps/
   tp1/
-    apellido-nombre/
+    grupo1/
+    grupo2/
   tp2/
-    apellido-nombre/
+    grupo1/
 ```
+
+Cada grupo tiene una única carpeta compartida por todos sus integrantes.
 
 ## Cómo subir tu código
 
