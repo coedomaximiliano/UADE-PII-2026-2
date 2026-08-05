@@ -8,8 +8,8 @@ Cada alumno sube su código mediante fork + pull request. Nadie tiene permiso de
 
 2. **Cloná tu fork**:
    ```
-   git clone https://github.com/TU-USUARIO/UADE.git
-   cd UADE
+   git clone https://github.com/TU-USUARIO/UADE-PII-2026-2.git
+   cd UADE-PII-2026-2
    ```
 
 3. **Creá tu carpeta** dentro del trabajo práctico correspondiente:
@@ -30,7 +30,7 @@ Cada alumno sube su código mediante fork + pull request. Nadie tiene permiso de
    git push origin tpN-apellido-nombre
    ```
 
-6. **Abrí un Pull Request** desde tu fork hacia `coedomaximiliano/UADE` (rama `main`).
+6. **Abrí un Pull Request** desde tu fork hacia `coedomaximiliano/UADE-PII-2026-2` (rama `main`).
 
 ## Reglas
 

@@ -18,15 +18,15 @@ Hay dos caminos: **GitHub Desktop** (con interfaz gráfica, más fácil para emp
 
 ### 1. Hacé fork del repositorio
 
-1. Andá a https://github.com/coedomaximiliano/UADE
+1. Andá a https://github.com/coedomaximiliano/UADE-PII-2026-2
 2. Hacé click en el botón **Fork** (arriba a la derecha).
-3. Confirmá con **Create fork**. Ahora tenés tu propia copia en `https://github.com/TU-USUARIO/UADE`.
+3. Confirmá con **Create fork**. Ahora tenés tu propia copia en `https://github.com/TU-USUARIO/UADE-PII-2026-2`.
 
 ### 2. Cloná tu fork con GitHub Desktop
 
 1. Abrí GitHub Desktop e iniciá sesión con tu cuenta de GitHub (`File > Options > Sign in`).
 2. `File > Clone repository`.
-3. Elegí tu fork `TU-USUARIO/UADE` de la lista y una carpeta local donde guardarlo. Click en **Clone**.
+3. Elegí tu fork `TU-USUARIO/UADE-PII-2026-2` de la lista y una carpeta local donde guardarlo. Click en **Clone**.
 
 ### 3. Creá tu carpeta y agregá tus archivos
 
@@ -52,8 +52,8 @@ Hay dos caminos: **GitHub Desktop** (con interfaz gráfica, más fácil para emp
 
 1. En GitHub Desktop aparece un botón **Create Pull Request** después del push (o entrá a tu fork en github.com).
 2. Se abre GitHub en el navegador. Verificá que:
-   - **base repository**: `coedomaximiliano/UADE`, rama `main`
-   - **head repository**: `TU-USUARIO/UADE`, rama `tpN-apellido-nombre`
+   - **base repository**: `coedomaximiliano/UADE-PII-2026-2`, rama `main`
+   - **head repository**: `TU-USUARIO/UADE-PII-2026-2`, rama `tpN-apellido-nombre`
 3. Título del PR: `TP1: Pérez Juan` (número de TP + tu nombre).
 4. Click en **Create pull request**.
 
@@ -72,14 +72,14 @@ git config --global user.email "tu-email@ejemplo.com"
 
 ### 2. Hacé fork del repositorio
 
-1. Andá a https://github.com/coedomaximiliano/UADE
+1. Andá a https://github.com/coedomaximiliano/UADE-PII-2026-2
 2. Click en **Fork** (arriba a la derecha) y confirmá con **Create fork**.
 
 ### 3. Cloná tu fork
 
 ```
-git clone https://github.com/TU-USUARIO/UADE.git
-cd UADE
+git clone https://github.com/TU-USUARIO/UADE-PII-2026-2.git
+cd UADE-PII-2026-2
 ```
 
 (Reemplazá `TU-USUARIO` por tu usuario de GitHub)
@@ -109,7 +109,7 @@ La primera vez que hagas `push` es posible que se abra una ventana del navegador
 ### 7. Abrí el Pull Request
 
 1. Terminada la push, la terminal te va a mostrar un link para crear el Pull Request (o entrá a tu fork en github.com, va a aparecer un botón **Compare & pull request**).
-2. Verificá que la base sea `coedomaximiliano/UADE` rama `main`.
+2. Verificá que la base sea `coedomaximiliano/UADE-PII-2026-2` rama `main`.
 3. Título del PR: `TP1: Perez Juan`.
 4. Click en **Create pull request**.
 
@@ -130,7 +130,7 @@ git push origin tp1-perez-juan
 ## Problemas comunes
 
 - **"Nombre de carpeta ya existe" o error al abrir PR**: asegurate de no haber tocado archivos fuera de tu propia carpeta.
-- **No me aparece el botón "Create pull request"**: entrá directamente a `https://github.com/TU-USUARIO/UADE/pull/new/tpN-apellido-nombre`.
+- **No me aparece el botón "Create pull request"**: entrá directamente a `https://github.com/TU-USUARIO/UADE-PII-2026-2/pull/new/tpN-apellido-nombre`.
 - **Me pide usuario y contraseña y falla**: GitHub ya no acepta contraseña por línea de comandos. Dejá que se abra la ventana del navegador para iniciar sesión (Git Credential Manager), o usá GitHub Desktop.
 
 Ante cualquier duda, consultá al docente antes de la fecha límite de entrega.
