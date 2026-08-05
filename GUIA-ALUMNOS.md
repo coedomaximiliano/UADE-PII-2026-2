@@ -127,6 +127,36 @@ La primera vez que hagas `push` es posible que se abra una ventana del navegador
 
 ---
 
+## Flujo del día a día mientras programan
+
+Esto se repite cada vez que alguien del grupo se sienta a programar, una vez que ya existe la rama `tpN-grupoN`:
+
+1. **Pararse en la rama correcta**:
+   ```
+   git checkout tpN-grupoN
+   ```
+2. **Traer lo que subieron los compañeros**, antes de tocar nada:
+   ```
+   git pull origin tpN-grupoN
+   ```
+3. **Programar** dentro de `tps/tpN/grupoN/`.
+4. **Guardar el avance** con commits chicos y seguidos (no uno solo gigante al final):
+   ```
+   git add tps/tpN/grupoN
+   git commit -m "agrego validación de X"
+   ```
+5. **Subir el avance**:
+   ```
+   git push origin tpN-grupoN
+   ```
+   El primer push sugiere crear el Pull Request; los siguientes pushes a la misma rama lo actualizan solos, sin hacer nada más.
+
+Repitan los pasos 2 a 5 cada sesión de trabajo. El paso 2 (`pull` antes de empezar) es el que evita la mayoría de los conflictos cuando son varios tocando el mismo archivo.
+
+*Si usan GitHub Desktop, es el mismo flujo con los botones equivalentes: **Fetch origin / Pull origin** antes de programar, y **Commit** + **Push origin** después de cada avance.*
+
+---
+
 ## Si tenés que corregir algo después de entregar
 
 No hace falta abrir un PR nuevo: alcanza con modificar los archivos en la carpeta local, y repetir el `commit` + `push` en la **misma rama**. El Pull Request se actualiza solo con los nuevos cambios. Si son varios integrantes pusheando, avisen en el grupo antes de hacer `push` para no pisarse.
