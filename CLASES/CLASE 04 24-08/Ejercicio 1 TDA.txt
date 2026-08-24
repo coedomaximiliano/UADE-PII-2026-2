@@ -1,0 +1,31 @@
+TDA ColaConPrioridad
+
+Dominio: CCP = Colección finita de elementos, cada uno asociado a
+         un valor de prioridad, donde el elemento de mayor
+         prioridad es siempre el primero en salir.
+
+Operaciones:
+
+  crear() -> CCP
+    post: devuelve una CCP vacía
+
+  esVacia(c: CCP) -> boolean
+    post: devuelve true si c no tiene elementos, false en caso contrario
+
+  esLlena(c: CCP) -> boolean
+    post: devuelve true si c alcanzó su capacidad máxima
+
+  insertar(c: CCP, x: elemento, prioridad: entero) -> CCP
+    pre:  c no está llena
+    post: x queda insertado en c, asociado a prioridad
+
+  extraerMax(c: CCP) -> CCP
+    pre:  c no está vacía
+    post: se elimina de c el elemento de mayor prioridad
+
+  verMax(c: CCP) -> elemento
+    pre:  c no está vacía
+    post: devuelve el elemento de mayor prioridad, sin eliminarlo
+
+  tamanio(c: CCP) -> entero
+    post: devuelve la cantidad de elementos que tiene c

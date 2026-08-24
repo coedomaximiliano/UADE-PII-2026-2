@@ -1,0 +1,30 @@
+TDA Conjunto
+
+Dominio: Conjunto = Colección finita de elementos, SIN repetidos y
+         SIN ningún orden definido entre ellos.
+
+Operaciones:
+
+  crear() -> Conjunto
+    post: devuelve un conjunto vacío
+
+  pertenece(c: Conjunto, x: elemento) -> boolean
+    post: devuelve true si x está en c, false en caso contrario
+
+  agregar(c: Conjunto, x: elemento) -> Conjunto
+    pre:  c no está lleno
+    post: x pertenece a c
+          (si x ya estaba, c queda igual — no se duplica)
+
+  eliminar(c: Conjunto, x: elemento) -> Conjunto
+    post: x ya no pertenece a c
+
+  esVacio(c: Conjunto) -> boolean
+    post: devuelve true si c no tiene elementos, false en caso contrario
+
+  tamanio(c: Conjunto) -> entero
+    post: devuelve la cantidad de elementos que tiene c
+
+  interseccion(c: Conjunto, otro: Conjunto) -> Conjunto
+    post: devuelve un nuevo conjunto con los elementos que
+          pertenecen tanto a c como a otro
