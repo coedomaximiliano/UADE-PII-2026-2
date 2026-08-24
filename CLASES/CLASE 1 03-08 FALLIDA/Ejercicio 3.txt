@@ -1,0 +1,76 @@
+TDA Conjunto
+
+Operaciones:
+  crear() → Conjunto
+    post: devuelve un conjunto vacío
+
+  pertenece(c: Conjunto, x: elemento) → boolean
+    post: devuelve true si x está en c, false en caso contrario
+
+  agregar(c: Conjunto, x: elemento) → Conjunto
+    post: x pertenece a c
+          (si x ya estaba, el conjunto queda igual — no se duplica)
+
+  eliminar(c: Conjunto, x: elemento) → Conjunto
+    post: x ya no pertenece a c
+
+  esVacio(c: Conjunto) → boolean
+    post: devuelve true si c no tiene elementos, false en caso contrario
+
+
+
+
+
+
+---------------------
+Nota sobre precondiciones: a diferencia de Pila y Cola, ninguna operación acá tiene precondición. eliminar un elemento que no está, o preguntar pertenece de algo que nunca se agregó, son operaciones perfectamente válidas (simplemente devuelven false o no hacen nada) — no rompen el TDA como sí lo haría desapilar una pila vacía.
+---------------------
+
+
+public class Conjunto {
+    // atributo(s) privados — se completan en la Clase 3
+    // (spoiler: va a ser un array, igual que Pila y Cola)
+
+    public Conjunto(int capacidad) {
+        // constructor = crear()
+    }
+
+    public boolean pertenece(int x) {
+        // ...
+    }
+
+    public void agregar(int x) {
+        // ...
+    }
+
+    public void eliminar(int x) {
+        // ...
+    }
+
+    public boolean esVacio() {
+        // ...
+    }
+}
+
+-----------------------------------------------------------
+
+
+Traducción especificación → Java (aplicando la tabla del Bloque 11)
+
+Especificación			Java
+crear() → Conjunto		Constructor Conjunto(int capacidad)
+pertenece(c, x) → boolean	boolean pertenece(int x) — c desaparece como parámetro porque es el objeto (this) sobre el que se llama al método
+agregar(c, x) → Conjunto	void agregar(int x) — no hace falta devolver el Conjunto: se modifica in place
+eliminar(c, x) → Conjunto	void eliminar(int x) — mismo criterio
+esVacio(c) → boolean		boolean esVacio()
+
+¿Qué atributo(s) privados necesitaría?
+
+Con lo visto hasta la Clase 1, alcanza con anticipar (sin implementar aún):
+
+Un array para guardar los elementos (private int[] elementos)
+Un contador de cuántos hay (private int cantidad)
+La capacidad máxima (private int capacidad)
+
+
+

@@ -1,0 +1,29 @@
+TDA Cola
+
+Operaciones:
+  crear() → Cola
+    post: devuelve una cola vacía
+
+  encolar(c: Cola, x: elemento) → Cola
+    post: x queda insertado al final de c
+
+  desencolar(c: Cola) → Cola
+    pre:  c no está vacía
+    post: se elimina el elemento que está primero en c
+          (el que lleva más tiempo esperando)
+
+  primero(c: Cola) → elemento
+    pre:  c no está vacía
+    post: devuelve el elemento que está primero en c,
+          sin eliminarlo
+
+  esVacia(c: Cola) → boolean
+    post: devuelve true si c no tiene elementos,
+          false en caso contrario
+
+
+
+
+
+
+

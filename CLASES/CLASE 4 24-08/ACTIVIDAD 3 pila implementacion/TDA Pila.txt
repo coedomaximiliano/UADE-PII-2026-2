@@ -1,0 +1,33 @@
+TDA Pila
+
+Dominio: Pila = Secuencia finita y ordenada de elementos, donde el
+         último agregado es accesible primero (LIFO).
+
+Operaciones:
+
+  crear() -> Pila
+    post: devuelve una pila vacía
+
+  esVacia(p: Pila) -> boolean
+    post: devuelve true si p no tiene elementos, false en caso contrario
+
+  esLlena(p: Pila) -> boolean
+    post: devuelve true si p alcanzó su capacidad máxima
+
+  apilar(p: Pila, x: elemento) -> Pila
+    pre:  p no está llena
+    post: x queda en el tope de p
+
+  desapilar(p: Pila) -> Pila
+    pre:  p no está vacía
+    post: se elimina el elemento del tope de p
+
+  tope(p: Pila) -> elemento
+    pre:  p no está vacía
+    post: devuelve el elemento del tope sin eliminarlo
+
+  tamanio(p: Pila) -> entero
+    post: devuelve la cantidad de elementos que tiene p
+
+  vaciar(p: Pila) -> Pila
+    post: p queda en el mismo estado que devuelve crear()

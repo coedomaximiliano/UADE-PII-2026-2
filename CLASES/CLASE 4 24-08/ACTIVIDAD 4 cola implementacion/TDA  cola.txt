@@ -1,0 +1,35 @@
+TDA Cola
+
+Dominio: Cola = Secuencia finita y ordenada de elementos, donde el
+         primero en entrar es el primero en salir (FIFO).
+
+Operaciones:
+
+  crear() -> Cola
+    post: devuelve una cola vacía
+
+  esVacia(c: Cola) -> boolean
+    post: devuelve true si c no tiene elementos, false en caso contrario
+
+  esLlena(c: Cola) -> boolean
+    post: devuelve true si c alcanzó su capacidad máxima
+
+  encolar(c: Cola, x: elemento) -> Cola
+    pre:  c no está llena
+    post: x queda insertado al final de c
+
+  desencolar(c: Cola) -> Cola
+    pre:  c no está vacía
+    post: se elimina el elemento que está primero en c
+          (el que lleva más tiempo esperando)
+
+  primero(c: Cola) -> elemento
+    pre:  c no está vacía
+    post: devuelve el elemento que está primero en c,
+          sin eliminarlo
+
+  tamanio(c: Cola) -> entero
+    post: devuelve la cantidad de elementos que tiene c
+
+
+

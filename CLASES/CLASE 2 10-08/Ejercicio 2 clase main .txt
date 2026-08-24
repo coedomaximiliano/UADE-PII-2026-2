@@ -1,0 +1,27 @@
+https://www.onlinegdb.com/online_java_compiler
+https://onecompiler.com/java
+
+public class Main {
+    public static void main(String[] args) {
+        Producto a = new Producto("Notebook", 100000);
+        Producto b = a;              // b apunta al MISMO objeto que a
+
+        b.aplicarDescuento(10);      // modifica el objeto compartido
+
+        System.out.println(a.getPrecio());  // imprime 90000.0
+        System.out.println(b.getPrecio());  // imprime 90000.0 (el mismo objeto)
+    }
+}
+
+Notar que: a y b no son "dos productos" — son dos nombres distintos que apuntan a la misma dirección de memoria. Modificar a través de b se refleja en a porque ambas variables referencian el mismo objeto. Esto es exactamente lo que se explicó en el Bloque 8 (paso de parámetros por valor/referencia), aplicado ahora a variables comunes en lugar de parámetros de método.
+a  ─┐
+    ├──►  [Producto: nombre="Notebook", precio=90000.0]
+b  ─┘
+
+Caso distinto:
+Producto a = new Producto("Notebook", 100000);
+Producto c = new Producto("Notebook", 100000);  // objeto DISTINTO, mismos valores
+
+c.aplicarDescuento(10);
+System.out.println(a.getPrecio());  // 100000.0 — no cambia
+System.out.println(c.getPrecio());  // 90000.0
