@@ -14,9 +14,9 @@ Cada grupo sube su código mediante fork + pull request. Nadie tiene permiso de 
 
 3. **Creá la carpeta de tu grupo** dentro del trabajo práctico correspondiente:
    ```
-   tps/tpN/grupoN/
+   TRABAJOS PRACTICOS/TPN/grupo N/
    ```
-   Reemplazá `tpN` por el número de TP y `grupoN` por el número de tu grupo (ej: `grupo3`).
+   Reemplazá `TPN` por el número de TP y `grupo N` por el número de tu grupo (ej: `grupo 3`).
 
 4. **Creá una rama** para la entrega del grupo:
    ```
@@ -25,7 +25,7 @@ Cada grupo sube su código mediante fork + pull request. Nadie tiene permiso de 
 
 5. **Commiteá y pusheá** a tu fork:
    ```
-   git add tps/tpN/grupoN
+   git add "TRABAJOS PRACTICOS/TPN/grupo N"
    git commit -m "TPN: GrupoN"
    git push origin tpN-grupoN
    ```

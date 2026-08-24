@@ -7,12 +7,12 @@ Repositorio público de la cátedra para que los alumnos suban el código de sus
 El código se organiza por trabajo práctico y, dentro de cada uno, por grupo:
 
 ```
-tps/
-  tp1/
-    grupo1/
-    grupo2/
-  tp2/
-    grupo1/
+TRABAJOS PRACTICOS/
+  TP1/
+    grupo 1/
+    grupo 2/
+  TP2/
+    grupo 1/
 ```
 
 Cada grupo tiene una única carpeta compartida por todos sus integrantes.

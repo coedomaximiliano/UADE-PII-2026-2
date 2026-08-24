@@ -42,8 +42,8 @@ Las entregas son por grupo: **un solo fork y una sola rama por grupo**, no uno p
 ### 3. Creá la carpeta del grupo y agreguen sus archivos
 
 1. Abrí la carpeta local del repo (en GitHub Desktop: `Repository > Show in Explorer`).
-2. Entrá a `tps/tpN/` (reemplazá `N` por el número del trabajo práctico que están entregando).
-3. Creá una carpeta con el número de grupo, por ejemplo `tps/tp1/grupo3/`.
+2. Entrá a `TRABAJOS PRACTICOS/TPN/` (reemplazá `N` por el número del trabajo práctico que están entregando).
+3. Creá una carpeta con el número de grupo, por ejemplo `TRABAJOS PRACTICOS/TP1/grupo 3/`.
 4. Copien ahí los archivos del TP (todos los integrantes trabajan sobre la misma carpeta).
 
 ### 4. Creá una rama
@@ -106,12 +106,12 @@ git checkout -b tp1-grupo3
 
 ### 5. Creá la carpeta del grupo y agreguen sus archivos
 
-Creá la carpeta `tps/tp1/grupo3/` (con el número de TP y el número de grupo) y copien ahí los archivos, entre todos los integrantes.
+Creá la carpeta `TRABAJOS PRACTICOS/TP1/grupo 3/` (con el número de TP y el número de grupo) y copien ahí los archivos, entre todos los integrantes.
 
 ### 6. Agregá, commiteá y pusheá los cambios
 
 ```
-git add tps/tp1/grupo3
+git add "TRABAJOS PRACTICOS/TP1/grupo 3"
 git commit -m "TP1: Grupo3"
 git push origin tp1-grupo3
 ```
@@ -139,10 +139,10 @@ Esto se repite cada vez que alguien del grupo se sienta a programar, una vez que
    ```
    git pull origin tpN-grupoN
    ```
-3. **Programar** dentro de `tps/tpN/grupoN/`.
+3. **Programar** dentro de `TRABAJOS PRACTICOS/TPN/grupo N/`.
 4. **Guardar el avance** con commits chicos y seguidos (no uno solo gigante al final):
    ```
-   git add tps/tpN/grupoN
+   git add "TRABAJOS PRACTICOS/TPN/grupo N"
    git commit -m "agrego validación de X"
    ```
 5. **Subir el avance**:
@@ -171,7 +171,7 @@ Pasa cuando vos y un compañero modificaron las mismas líneas de un mismo archi
 3. Editá el archivo a mano: dejá el código que corresponda (el tuyo, el de tu compañero, o una combinación de ambos) y borrá las marcas `<<<<<<<`, `=======` y `>>>>>>>`.
 4. Guardá el archivo y marcá el conflicto como resuelto:
    ```
-   git add tps/tpN/grupoN
+   git add "TRABAJOS PRACTICOS/TPN/grupo N"
    git commit
    ```
    (git arma un mensaje de commit por default para el merge; con aceptarlo alcanza)
@@ -189,7 +189,7 @@ Si no están seguros de qué versión dejar, hablen por fuera de git (WhatsApp, 
 No hace falta abrir un PR nuevo: alcanza con modificar los archivos en la carpeta local, y repetir el `commit` + `push` en la **misma rama**. El Pull Request se actualiza solo con los nuevos cambios. Si son varios integrantes pusheando, avisen en el grupo antes de hacer `push` para no pisarse.
 
 ```
-git add tps/tp1/grupo3
+git add "TRABAJOS PRACTICOS/TP1/grupo 3"
 git commit -m "TP1: correcciones"
 git push origin tp1-grupo3
 ```
