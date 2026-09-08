@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CLASES/CLASES.iml" filepath="$PROJECT_DIR$/CLASES/CLASES.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TRABAJOS PRACTICOS/TRABAJOS PRACTICOS.iml" filepath="$PROJECT_DIR$/TRABAJOS PRACTICOS/TRABAJOS PRACTICOS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/UADE-PII-2026-2-G7.iml" filepath="$PROJECT_DIR$/.idea/UADE-PII-2026-2-G7.iml" />
+    </modules>
+  </component>
+</project>
