@@ -4,7 +4,7 @@
 
 |Apellido|Nombre|
 |-|-|
-|Manuel Quintana Miño||
+|Quintana Miño|Manuel|
 
 
 
