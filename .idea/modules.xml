@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CLASES/CLASE 06 07-09/CLASE 06 07-09.iml" filepath="$PROJECT_DIR$/CLASES/CLASE 06 07-09/CLASE 06 07-09.iml" />
-      <module fileurl="file://$PROJECT_DIR$/CLASES/CLASES.iml" filepath="$PROJECT_DIR$/CLASES/CLASES.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/UADE-PII-2026-2.iml" filepath="$PROJECT_DIR$/.idea/UADE-PII-2026-2.iml" />
     </modules>
   </component>

@@ -1,0 +1,60 @@
+PARTE 2 - TDA COLA
+
+
+
+2.1 ESPECIFICACION
+TDA Cola
+
+Dominio: Cola = secuencia finita y ordenada de elementos, donde el primer
+elemento en ingresar es el primer elemento en salir (FIFO).
+
+
+
+Operaciones:
+
+crear() -> Cola
+  post: devuelve una cola vacia
+
+encolar(c: Cola, x: elemento) -> Cola
+  post: x queda agregado al final de c
+
+desencolar(c: Cola) -> Cola
+  pre:  c no esta vacía
+  post: se elimina el elemento del frente de c
+
+frente(c: Cola) -> elemento
+  pre:  c no esta vacía
+  post: devuelve el elemento del frente de c, sin eliminarlo
+
+es Vacía(c: Cola) -> boolean
+  post: devuelve true si c no tiene elementos
+
+
+
+
+2.2 COMPLEJIDAD DE ENCOLAR Y DESENCOLAR
+
+
+
+
+Cola lineal (variante A):
+  - encolar: O(1)
+  - desencolar: O(1)
+  Pero el índice "fin" solo avanza, nunca retrocede. Entonces, aunque se
+  desencolen elementos y queden lugares libres al principio del array,
+  esos lugares se pierden para siempre. Con el tiempo la cola puede
+  marcar "llena" aunque tenga muy pocos elementos reales adentro.
+
+
+Cola circular (variante B):
+  - encolar: O(1)
+  - desencolar: O(1)
+  Usa el operador modulo (%) para que los indices "den la vuelta" al
+  llegar al final del array. Asi, cualquier lugar que se libera con un
+  desencolar se puede volver a usar enseguida.
+
+Conclusion: las dos variantes tienen el mismo costo (O(1)) en cada
+operacion individual. La diferencia esta en el uso del espacio a lo
+largo del tiempo: la lineal desperdicia lugares del array de forma
+irreversible, mientras que la circular los reutiliza siempre. Por eso,
+en la practica conviene usar la COLA CIRCULAR.
