@@ -1,0 +1,273 @@
+TRABAJO PRACTICO 3 - ARBOL BINARIO DE BUSQUEDA - GRUPO 6
+
+====================================================================
+PARTE 1 - ESPECIFICACION DEL TDA ARBOL BINARIO DE BUSQUEDA
+====================================================================
+
+Dominio
+
+Arbol: conjunto finito de elementos comparables, sin repetidos,
+organizados en un arbol binario. Cada nodo tiene como maximo un hijo
+izquierdo y uno derecho. Para cada nodo, TODOS los valores de su
+subarbol izquierdo son menores que su dato y TODOS los de su subarbol
+derecho son mayores. El arbol puede estar vacio.
+
+En nuestra implementacion los elementos son enteros (int), que se
+comparan con <, > e ==. Esto tambien permite resolver sumaNodos().
+
+Operaciones
+
+crear() -> Arbol
+    Pre: -
+    Post: devuelve un arbol vacio, sin nodos.
+    En Java corresponde a new ArbolBinarioBusqueda().
+
+insertar(a: Arbol, x: entero) -> Arbol
+    Pre: a es un ABB valido.
+    Post: los elementos de a son los anteriores unidos con {x}, y se
+          conserva la propiedad de ABB. Si x ya pertenecia, a queda
+          sin cambios (tampoco se modifica su forma).
+    En Java modifica a y no devuelve otro arbol.
+
+pertenece(a: Arbol, x: entero) -> boolean
+    Pre: a es un ABB valido.
+    Post: devuelve true si y solo si x esta en a. No modifica a.
+
+eliminar(a: Arbol, x: entero) -> Arbol
+    Pre: a es un ABB valido.
+    Post: los elementos de a son los anteriores menos {x}, conservando
+          la propiedad de ABB. Si x no pertenece, a queda sin cambios.
+          No se elimina ni se duplica ningun otro elemento.
+          Si el nodo es hoja, se lo desconecta de su padre.
+          Si tiene un hijo, ese hijo ocupa su lugar.
+          Si tiene dos hijos, se reemplaza su dato por el menor valor
+          del subarbol derecho (sucesor inorder) y se quita de ese
+          subarbol el nodo que contenia dicho valor. Ese nodo no tiene
+          hijo izquierdo; si tiene hijo derecho, este ocupa su lugar.
+          Si se elimina la raiz, se actualiza la referencia a la raiz
+          segun corresponda en los mismos casos.
+    Esta operacion se especifica, pero no se implementa, de acuerdo con
+    la aclaracion de la Parte 2 de la consigna.
+
+esVacio(a: Arbol) -> boolean
+    Pre: -
+    Post: devuelve true si y solo si a no tiene nodos. No modifica a.
+
+cantidadNodos(a: Arbol) -> entero
+    Pre: -
+    Post: devuelve la cantidad de nodos de a; para el arbol vacio
+          devuelve 0. No modifica a.
+
+Operacion auxiliar para utilizacion
+
+getRaiz(a: Arbol) -> NodoArbol
+    Pre: -
+    Post: devuelve la referencia a la raiz, o null si a esta vacio.
+          No modifica a. Se usa para iniciar los auxiliares recursivos
+          de UtilizacionArbol; estos solo consultan los nodos.
+
+====================================================================
+PARTE 2 - IMPLEMENTACION DINAMICA Y COMPLEJIDAD
+====================================================================
+
+NodoArbol guarda dato, izquierdo y derecho. ArbolBinarioBusqueda guarda
+un unico atributo: raiz. No usamos un contador ni colecciones de Java.
+cantidadNodos() cuenta los nodos recursivamente.
+
+insertar() devuelve el nodo creado cuando llega a una referencia null.
+Al volver de la recursion se conecta el resultado con el padre. Si el
+dato ya existe, se devuelve el mismo nodo sin insertar otro.
+
+pertenece() devuelve false si llega a null, true si encuentra el dato,
+y en otro caso sigue solamente por el hijo que puede contenerlo.
+
+2.2 Analisis de insertar y pertenece
+
+Sea n la cantidad de nodos y h la altura medida en cantidad de nodos.
+Ambas operaciones siguen un unico camino desde la raiz. Cada llamada
+hace comparaciones y sigue una sola referencia: el costo depende de la
+longitud de ese camino, no de visitar todos los nodos.
+
+Arbol balanceado: O(log n) en el peor caso dentro de esa forma de arbol,
+porque h es aproximadamente log2(n). Aunque el arbol tenga muchos nodos,
+en cada paso se descarta un subarbol completo. Encontrar un elemento en
+la raiz, o intentar insertar el mismo dato de la raiz, cuesta O(1).
+
+Peor caso general: O(n). Insertar 1, 2, 3, ..., n, en ese orden, produce
+una cadena hacia la derecha: cada nuevo valor es mayor que todos los
+anteriores. La altura termina siendo n. Buscar n, buscar n+1 o insertar
+n+1 recorre toda la cadena. El orden decreciente produce una cadena
+hacia la izquierda. Construir la cadena completa cuesta O(n^2), porque
+las inserciones recorren caminos de longitud creciente.
+
+No hay un orden fijo de posiciones de entrada que garantice un arbol
+balanceado para cualquier asignacion de valores: se pueden elegir los
+valores para que ese orden termine siendo creciente o decreciente.
+El insertar implementado no reorganiza ni balancea el arbol.
+
+Si se conocen todos los valores de antemano, se los puede ordenar e
+insertar primero la mediana, luego las medianas de cada mitad, y repetir
+el criterio. Esa estrategia SI permite construir un arbol balanceado,
+pero el orden se elige segun los valores y no es una garantia de
+insertar() ante cualquier secuencia de entrada.
+
+Resumen de las operaciones implementadas (peor caso)
+
+Operacion             Balanceado       Degenerado       Motivo
+crear()               O(1)             O(1)             raiz = null.
+insertar(x)           O(log n)         O(n)             Un camino.
+pertenece(x)          O(log n)         O(n)             Un camino.
+esVacio()             O(1)             O(1)             Compara raiz.
+cantidadNodos()       O(n)             O(n)             Cuenta todos.
+getRaiz()             O(1)             O(1)             Lee raiz.
+
+Para n = 0 las operaciones anteriores cuestan O(1). Las operaciones
+recursivas usan O(h) de memoria auxiliar por las llamadas pendientes
+para un arbol no vacio: O(log n) balanceado y O(n) degenerado.
+
+====================================================================
+PARTE 3 - RECORRIDOS
+====================================================================
+
+Los cuatro recorridos imprimen los datos separados por espacios y
+terminan con un salto de linea. No modifican el arbol. Si esta vacio,
+solo imprimen el salto de linea.
+
+inorder: izquierdo, nodo, derecho.
+preorder: nodo, izquierdo, derecho.
+postorder: izquierdo, derecho, nodo.
+
+Los tres se resuelven con recursion real y el caso base nodo == null.
+inorder imprime en orden creciente porque recorre primero los valores
+menores que el nodo y luego los mayores. La misma propiedad se cumple
+en cada subarbol; como no hay repetidos, el orden es estricto.
+
+recorridoPorNiveles usa una ColaDinamica propia, adaptada para guardar
+referencias a NodoArbol. Se encola la raiz si existe y se desencola un
+nodo por vez, imprimiendo su dato y encolando primero su hijo izquierdo
+y luego el derecho. FIFO garantiza que los nodos de un nivel salgan
+antes que sus hijos y que se respete el orden de izquierda a derecha.
+
+La cola sigue el esquema de nodos del TP2: primero, ultimo y cantidad.
+Se usa mediante la interfaz Cola. Encolar, desencolar, primero,
+esVacia y tamanio son O(1). Desencolar el ultimo elemento tambien deja
+ultimo en null, por lo que la cola puede volver a usarse. Consultar o
+quitar el primero de una cola vacia lanza RuntimeException.
+
+Salida del arbol pedido
+
+Orden de insercion: 50, 30, 70, 20, 40, 60, 80, 10, 25, 65, 90.
+
+inorder: 10 20 25 30 40 50 60 65 70 80 90
+preorder: 50 30 20 10 25 40 70 60 65 80 90
+postorder: 10 25 20 40 30 65 60 90 80 70 50
+recorridoPorNiveles: 50 30 70 20 40 60 80 10 25 65 90
+
+Complejidades
+
+Los cuatro recorridos son O(n) para n > 0: cada nodo se procesa una
+unica vez. Los tres recorridos en profundidad usan O(h) de memoria
+auxiliar. El recorrido por niveles usa O(w), donde w es el ancho maximo
+del arbol (cantidad maxima de nodos de un nivel); en el peor caso es
+O(n). No hay recursion en el recorrido por niveles. Con arbol vacio,
+el tiempo y el espacio son O(1).
+
+====================================================================
+PARTE 4 - UTILIZACION
+====================================================================
+
+Los metodos estan en UtilizacionArbol, separados de la implementacion,
+como UtilizacionDiccionario en el TP2. Los tres primeros reciben un
+ArbolBinarioBusqueda y llaman a auxiliares recursivos desde su raiz.
+esABB recibe directamente un NodoArbol, como pide la consigna.
+Ninguno de estos metodos modifica los datos ni los enlaces del arbol.
+
+altura(a: Arbol) -> entero
+    Pre: a es un arbol inicializado.
+    Post: devuelve la cantidad de nodos del camino mas largo desde la
+          raiz hasta una hoja. Vacio: 0. Un solo nodo: 1.
+    Solucion: para null devuelve 0; para otro nodo devuelve 1 mas el
+    maximo entre las alturas de sus dos hijos.
+    Tiempo: O(n), porque calcula las alturas de ambos lados visitando
+    todos los nodos una vez. No es O(log n) aunque este balanceado.
+
+contarHojas(a: Arbol) -> entero
+    Pre: a es un arbol inicializado.
+    Post: devuelve la cantidad de nodos sin hijos. Vacio: 0.
+    Solucion: null aporta 0, una hoja aporta 1 y el resto suma las
+    cantidades de hojas de los dos subarboles.
+    Tiempo: O(n), porque visita cada nodo una vez.
+
+sumaNodos(a: Arbol) -> entero
+    Pre: a es un arbol inicializado con valores int; las sumas quedan
+         dentro del rango de int.
+    Post: devuelve la suma de todos sus datos. Vacio: 0.
+    Solucion: null aporta 0; cada nodo aporta su dato mas las sumas
+    recursivas de los dos subarboles.
+    Tiempo: O(n), porque cada dato se suma una vez.
+
+esABB(a: NodoArbol) -> boolean
+    Pre: a es null o la raiz de un arbol binario finito, sin ciclos ni
+         nodos compartidos. Puede incumplir el orden o tener repetidos.
+    Post: devuelve true si y solo si se cumple la propiedad estricta de
+          ABB en todos sus nodos. El arbol vacio es un ABB valido.
+    Solucion: el auxiliar recibe un limite inferior y uno superior,
+    dados por nodos ancestros. null indica que no hay limite de ese
+    lado. El dato debe ser mayor que el inferior y menor que el superior.
+    Al ir a la izquierda, el nodo actual pasa a ser el limite superior;
+    al ir a la derecha, pasa a ser el inferior. El otro limite se
+    conserva. Asi se respetan tambien las restricciones de ancestros
+    mas lejanos, y las comparaciones estrictas rechazan repetidos.
+    No se suma ni resta 1 a los limites, ni se usa un int como centinela:
+    los valores extremos de int tambien pueden formar parte del arbol.
+    Tiempo: O(n) en el peor caso, con una sola visita por nodo y trabajo
+    constante en cada visita. Puede terminar antes si encuentra un
+    error; si es valido debe revisar todos los nodos.
+
+Los cuatro metodos usan O(h) de memoria auxiliar por la recursion para
+n > 0, y O(1) para el arbol vacio.
+
+Ejemplo que exige revisar ancestros
+
+       50
+      /
+     30
+       \
+        60
+
+30 < 50 y 60 > 30, por lo que las comparaciones solo con el padre pasan.
+Pero 60 pertenece al subarbol izquierdo de 50 y deberia ser menor que
+50. Nuestro metodo conserva 50 como limite superior y devuelve false.
+Main prueba este caso, el error simetrico en el subarbol derecho y un
+valor igual al de un ancestro.
+
+Resultados adicionales del programa de prueba
+
+Arbol de la consigna: cantidad = 11, altura = 4, hojas = 5, suma = 540,
+esABB = true. pertenece(65) = true y pertenece(55) = false.
+Insertar otra vez 50 y 25 mantiene los 11 nodos y los mismos recorridos.
+Vacio: cantidad = 0, altura = 0, hojas = 0, suma = 0, esABB = true.
+Unico nodo 7: cantidad = 1, altura = 1, hojas = 1, suma = 7.
+Cadena 1, 2, 3, 4, 5: cantidad = 5, altura = 5, hojas = 1, suma = 15.
+Valores -10, -20, -5: cantidad = 3, altura = 2, hojas = 2, suma = -35.
+
+====================================================================
+ARCHIVOS Y EJECUCION
+====================================================================
+
+NodoArbol.java: datos y referencias del arbol.
+ArbolBinarioBusqueda.java: operaciones base y los cuatro recorridos.
+Cola.java: interfaz de la cola auxiliar de nodos.
+NodoCola.java y ColaDinamica.java: implementacion enlazada de la cola.
+UtilizacionArbol.java: metodos recursivos de la Parte 4.
+Main.java: pruebas y salida de los recorridos pedidos.
+integrantes.md: integrantes de la entrega anterior del grupo.
+
+Desde esta carpeta (grupo 6 del TP3), con un JDK instalado:
+
+    javac -encoding UTF-8 -d salida *.java
+    java -cp salida Main
+
+Es un unico proyecto, sin paquetes, dependencias ni clases repetidas
+dentro de la entrega. Se compila solo esta carpeta, como unidad
+independiente de los TP anteriores y de los proyectos de otros grupos.
