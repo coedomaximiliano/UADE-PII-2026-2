@@ -18,7 +18,6 @@ public class ArbolBinarioBusqueda {
         } else if (x > nodo.dato) {
             nodo.derecho = insertar(nodo.derecho, x);
         }
-        // Si x ya esta, no se agrega otro nodo.
         return nodo;
     }
 
@@ -54,8 +53,6 @@ public class ArbolBinarioBusqueda {
         return 1 + cantidadNodos(nodo.izquierdo) + cantidadNodos(nodo.derecho);
     }
 
-    // Permite iniciar los metodos recursivos de utilizacion.
-    // Los metodos que consultan esta referencia no deben modificar sus nodos.
     public NodoArbol getRaiz() {
         return raiz;
     }
