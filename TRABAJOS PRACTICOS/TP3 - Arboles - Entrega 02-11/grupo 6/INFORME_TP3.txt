@@ -1,4 +1,4 @@
-TRABAJO PRACTICO 3 - ARBOL BINARIO DE BUSQUEDA - GRUPO 6
+
 
 ====================================================================
 PARTE 1 - ESPECIFICACION DEL TDA ARBOL BINARIO DE BUSQUEDA
@@ -250,24 +250,3 @@ Vacio: cantidad = 0, altura = 0, hojas = 0, suma = 0, esABB = true.
 Unico nodo 7: cantidad = 1, altura = 1, hojas = 1, suma = 7.
 Cadena 1, 2, 3, 4, 5: cantidad = 5, altura = 5, hojas = 1, suma = 15.
 Valores -10, -20, -5: cantidad = 3, altura = 2, hojas = 2, suma = -35.
-
-====================================================================
-ARCHIVOS Y EJECUCION
-====================================================================
-
-NodoArbol.java: datos y referencias del arbol.
-ArbolBinarioBusqueda.java: operaciones base y los cuatro recorridos.
-Cola.java: interfaz de la cola auxiliar de nodos.
-NodoCola.java y ColaDinamica.java: implementacion enlazada de la cola.
-UtilizacionArbol.java: metodos recursivos de la Parte 4.
-Main.java: pruebas y salida de los recorridos pedidos.
-integrantes.md: integrantes de la entrega anterior del grupo.
-
-Desde esta carpeta (grupo 6 del TP3), con un JDK instalado:
-
-    javac -encoding UTF-8 -d salida *.java
-    java -cp salida Main
-
-Es un unico proyecto, sin paquetes, dependencias ni clases repetidas
-dentro de la entrega. Se compila solo esta carpeta, como unidad
-independiente de los TP anteriores y de los proyectos de otros grupos.

@@ -45,7 +45,6 @@ public class UtilizacionArbol {
         if (nodo == null) {
             return true;
         }
-        // Los limites vienen de todos los ancestros, no solo del padre.
         if (minimo != null && nodo.dato <= minimo.dato) {
             return false;
         }
