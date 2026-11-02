@@ -25,3 +25,17 @@
 ## cantidadVertices(g: Grafo) -> entero
 - **Pre:** existe el grafo
 - **Post:** devuelve la cantidad de vértices actuales de g.
+
+## Operaciones auxiliares para los recorridos
+
+## indiceDe(g: Grafo, etiqueta) -> entero
+- **Pre:** existe el grafo, la etiqueta pertenece al grafo (si no, devolver error).
+- **Post:** devuelve el índice del vértice identificado por etiqueta. No modifica el grafo.
+
+## etiquetaDe(g: Grafo, indice: entero) -> etiqueta
+- **Pre:** existe el grafo, 0 <= indice < cantidadVertices(g) (si no, devolver error).
+- **Post:** devuelve la etiqueta del vértice que tiene ese índice. No modifica el grafo.
+
+## vecinosPorIndice(g: Grafo, indice: entero) -> arreglo de enteros
+- **Pre:** existe el grafo, 0 <= indice < cantidadVertices(g) (si no, devolver error).
+- **Post:** devuelve un arreglo nuevo con los índices de los vecinos, sin repetidos y en orden creciente. Si no hay vecinos devuelve un arreglo vacío. No modifica el grafo.
