@@ -1,0 +1,298 @@
+
+
+====================================================================
+PARTE 0 - PREGUNTAS TEÓRICAS
+====================================================================
+
+1) Diccionario vs. Conjunto. ¿Por qué existeClave antes de definir?
+
+Un Conjunto solo guarda elementos y responde si un elemento pertenece o
+no. Un Diccionario guarda pares (clave, valor): además de saber si una
+clave está, permite recuperar el valor asociado a ella. Las claves de un
+Diccionario se comportan como un Conjunto (sin repetidos), pero cada una
+lleva un dato asociado.
+
+definir() tiene que decidir entre dos comportamientos: si la clave ya
+existe, reemplaza el valor; si no existe, agrega un par nuevo. Para
+decidirlo necesita saber primero si la clave existe. Sin esa distinción
+se podrían duplicar claves y cantidadClaves() dejaría de ser correcta.
+
+2) ¿Qué es un Nodo? ¿Qué información mínima guarda?
+
+Un Nodo es un objeto que guarda un dato y una referencia al próximo nodo
+de la estructura. Los nodos se crean de a uno cuando hacen falta y se
+encadenan entre sí por esas referencias, sin ocupar posiciones contiguas
+como en un arreglo. Lo mínimo es: el dato (en el Diccionario, el par
+clave y valor) y la referencia al siguiente nodo (null si es el último).
+
+3) ¿Por qué insertar al principio es O(1) en dinámica y O(n) en estática?
+
+En la dinámica, insertar al principio es crear un nodo, hacer que su
+siguiente apunte a la cabeza actual y mover la cabeza al nodo nuevo: son
+siempre las mismas pocas operaciones, sin importar cuántos elementos
+haya. En la estática, la posición 0 del arreglo ya está ocupada, así que
+hay que correr todos los elementos una posición hacia la derecha para
+dejarla libre: son n movimientos.
+
+4) Ventaja y desventaja de la dinámica en uso de memoria.
+
+Ventaja: usa solo la memoria que necesita. Crece de a un nodo por
+elemento, no hay que reservar una capacidad máxima de antemano y no hay
+límite fijo (no existe "estructura llena").
+
+Desventaja: cada elemento ocupa más memoria que en un arreglo, porque
+además del dato guarda la referencia al siguiente y cada nodo es un
+objeto aparte (con su propio costo de objeto). Además, los nodos quedan
+dispersos en memoria en vez de contiguos.
+
+5) Mismo Big O, tiempos distintos. ¿Por qué?
+
+Big O describe cómo crece el costo con n, no cuánto cuesta cada paso.
+Dos implementaciones O(n) pueden hacer la misma cantidad de pasos pero
+con un costo distinto por paso. Un factor es la localidad de referencia:
+recorrer un arreglo es leer posiciones contiguas de memoria, que el
+procesador aprovecha muy bien; recorrer nodos es saltar a direcciones
+dispersas siguiendo referencias, lo que hace cada paso más lento. Otros
+factores: el costo extra de memoria por elemento, las constantes que Big
+O descarta y la optimización que haga la JVM.
+
+6) ¿Por qué la medición empírica complementa pero no reemplaza a Big O?
+
+La medición muestra cuánto tarda realmente una implementación en una
+máquina concreta, con datos concretos, y permite comparar constantes que
+Big O ignora (por ejemplo, cuál de dos O(n) es más rápida). Pero solo
+vale para los tamaños, datos y máquina que se midieron, y tiene ruido
+(otros procesos, optimización de la JVM). Big O, en cambio, garantiza
+cómo escala el costo para cualquier n, incluso para tamaños no medidos,
+y analiza el peor caso aunque no se lo haya provocado en la prueba. El
+warmup y el mejor de varias repeticiones reducen el ruido de la
+medición, pero no la convierten en una garantía general.
+
+
+====================================================================
+PARTE 1 - ESPECIFICACIÓN DEL TDA DICCIONARIO
+====================================================================
+
+Dominio
+
+Diccionario: colección finita de pares (clave, valor), sin ningún orden
+entre ellos, donde cada clave aparece a lo sumo una vez (cada clave
+tiene asociado, a lo sumo, un valor).
+
+Operaciones
+
+crear() -> Diccionario
+    Pre: -
+    Post: devuelve un diccionario vacío.
+
+definir(d: Diccionario, clave: elemento, valor: elemento) -> Diccionario
+    Pre: -
+    Post: si existeClave(d, clave), se reemplaza el valor asociado a
+          clave por valor; si no, se agrega el par (clave, valor) a d.
+          El resto de los pares de d no se modifica.
+
+obtener(d: Diccionario, clave: elemento) -> elemento
+    Pre: existeClave(d, clave).
+    Post: devuelve el valor asociado a clave en d; d no se modifica.
+
+eliminar(d: Diccionario, clave: elemento) -> Diccionario
+    Pre: existeClave(d, clave).
+    Post: se quita de d el par cuya clave es clave; el resto de los
+          pares de d no se modifica.
+
+existeClave(d: Diccionario, clave: elemento) -> boolean
+    Pre: -
+    Post: devuelve true si y solo si hay un par en d cuya clave es
+          clave; d no se modifica.
+
+esVacio(d: Diccionario) -> boolean
+    Pre: -
+    Post: devuelve true si y solo si cantidadClaves(d) = 0; d no se
+          modifica.
+
+cantidadClaves(d: Diccionario) -> entero
+    Pre: -
+    Post: devuelve la cantidad de pares clave-valor que tiene d; d no
+          se modifica.
+
+claves(d: Diccionario) -> Lista
+    Pre: -
+    Post: devuelve una lista, sin ningún orden particular, que contiene
+          exactamente una vez cada clave de d (su tamaño es
+          cantidadClaves(d)); d no se modifica.
+
+
+====================================================================
+PARTE 2 - IMPLEMENTACIÓN DINÁMICA
+====================================================================
+
+
+2.1 Análisis de complejidad (peor caso, n = cantidad de claves)
+
+crear()                   O(1)  Solo inicializa cabeza en null y cantidad
+                                en 0; no depende de n.
+
+definir(d, clave, valor)  O(n)  Antes de insertar hay que saber si la clave
+                                ya existe: buscarNodo recorre la cadena y,
+                                si la clave es nueva, la recorre entera sin
+                                encontrarla. Enganchar el nodo nuevo como
+                                cabeza es O(1); el costo es la búsqueda.
+
+obtener(d, clave)         O(n)  No hay orden ni acceso por posición: para
+                                llegar a un nodo hay que seguir las
+                                referencias desde la cabeza. Si la clave
+                                está en el último nodo, se recorren los n.
+
+eliminar(d, clave)        O(n)  Hay que encontrar el nodo (recorrido lineal
+                                guardando el anterior). Desengancharlo es
+                                O(1): anterior.siguiente = actual.siguiente.
+
+existeClave(d, clave)     O(n)  Usa buscarNodo; si la clave no está, recorre
+                                toda la cadena para poder decir que no.
+
+esVacio(d)                O(1)  Solo compara cabeza con null.
+
+cantidadClaves(d)         O(1)  Devuelve el contador "cantidad", que se
+                                actualiza en definir y eliminar. Sin ese
+                                contador habría que recorrer la cadena para
+                                contar y sería O(n).
+
+claves(d)                 O(n)  Recorre los n nodos una vez y agrega cada
+                                clave a la Lista; cada agregar es O(1)
+                                porque la Lista guarda su último nodo.
+
+
+====================================================================
+PARTE 3 - COMPARACIÓN ESTÁTICA VS. DINÁMICA
+====================================================================
+
+DiccionarioEstatico usa dos arreglos paralelos de tamaño fijo (claves[i]
+tiene asociado valores[i]) y un contador. Igual que la versión dinámica,
+no mantiene orden y busca linealmente (indiceDe, desde la posición 0).
+Cada clave nueva va a la primera posición libre (claves[cantidad]);
+eliminar reemplaza el par borrado por el último para no correr el resto.
+Como tiene capacidad fija, definir() de una clave nueva con el arreglo
+lleno lanza una excepción (restricción de esta implementación, no del
+TDA). Sus complejidades son las mismas que las de la tabla 2.1, salvo
+crear(): crear los dos arreglos de tamaño capacidad cuesta O(capacidad),
+porque Java inicializa cada posición en null.
+
+3.1 Medición empírica
+
+Método (MedicionTiempos.java):
+- medirNanos(op, 20): 3 ejecuciones de warmup sin medir y luego 20
+  ejecuciones medidas con System.nanoTime(); se toma el mejor tiempo.
+- Antes de medir se corren dos rondas completas (n = 1.000 y n = 10.000)
+  que se descartan. Sin ellas, la fila de n = 1.000 salía con tiempos
+  parecidos o mayores a los de n = 10.000, probablemente porque la JVM
+  todavía no había optimizado el código; con las rondas previas, la
+  fila de n = 1.000 pasa a ser unas 10 veces menor que la de 10.000.
+- Para cada n se cargan las claves enteras 0, 1, ..., n-1, en ese orden,
+  en un diccionario de cada implementación.
+- obtener(): se busca en cada implementación la clave que obliga a
+  recorrer todo. En la dinámica cada clave nueva queda como cabeza, así
+  que la última del recorrido es la primera cargada (clave 0). En la
+  estática cada clave nueva va al final y se busca desde la posición 0,
+  así que la última del recorrido es la última cargada (clave n-1). Por
+  eso no se busca la misma clave en las dos.
+- definir(): cada ejecución (warmup incluido) usa una clave nunca vista
+  (n, n+1, n+2, ...), así que siempre es una inserción nueva que recorre
+  todo sin encontrar la clave. obtener() se mide antes que definir() para
+  que el diccionario tenga exactamente n claves.
+
+Resultados (mejor tiempo de 20 repeticiones; Apple M1 Pro, OpenJDK 21):
+
+n         definir() Estática   definir() Dinámica   obtener() Estática   obtener() Dinámica
+1.000     458 ns               1,79 µs              458 ns               1,79 µs
+10.000    5,13 µs              20,17 µs             5,13 µs              18,79 µs
+100.000   50,38 µs             191,50 µs            50,33 µs             191,42 µs
+
+Se corrió el programa 3 veces; las otras dos corridas dieron valores
+dentro de un 9 % de estos (la mayor diferencia fue definir() estática
+con n = 1.000, que en una corrida dio 417 ns).
+
+3.2 Conclusión
+
+Sí, la tendencia coincide con la complejidad teórica O(n). Al multiplicar
+n por 10, los tiempos también se multiplican aproximadamente por 10:
+- definir() estática: 458 ns -> 5,13 µs (x11,2) -> 50,38 µs (x9,8).
+- definir() dinámica: 1,79 µs -> 20,17 µs (x11,3) -> 191,50 µs (x9,5).
+- obtener() estática: 458 ns -> 5,13 µs (x11,2) -> 50,33 µs (x9,8).
+- obtener() dinámica: 1,79 µs -> 18,79 µs (x10,5) -> 191,42 µs (x10,2).
+Además definir() de una clave nueva tarda prácticamente lo mismo que
+obtener() de la clave más lejana, en ambas implementaciones. Esto es lo
+esperable: las dos operaciones hacen el mismo recorrido completo y lo
+único que agrega definir() es una inserción O(1).
+
+Aunque las dos son O(n), la estática fue entre 3,7 y 3,9 veces más
+rápida en cada tamaño (por ejemplo, 50,38 µs contra 191,50 µs en definir()
+con n = 100.000).
+Big O solo dice que ambas crecen en forma lineal; no compara el costo de
+cada paso del recorrido, y ese costo es distinto:
+- Localidad de referencia: en la estática, las referencias a las claves
+  están en un arreglo, una al lado de la otra, y avanzar es pasar a la
+  posición siguiente. El procesador trae bloques contiguos de memoria,
+  así que al leer una posición ya tiene cerca las próximas.
+- En la dinámica, para avanzar hay que leer primero la referencia
+  "siguiente" del nodo actual y recién ahí saber dónde está el próximo.
+  Los nodos son objetos separados que pueden estar dispersos en memoria,
+  así que se aprovecha menos lo que el procesador ya trajo.
+- Overhead de memoria: cada nodo, además de la clave y el valor, guarda
+  la referencia "siguiente" y es un objeto con su propio costo. La misma
+  cantidad de claves ocupa más memoria que en los arreglos, y recorrerla
+  implica leer más memoria.
+
+En resumen: la complejidad teórica predice bien cómo escala el tiempo con
+n, y la medición agrega lo que Big O no muestra, que es la diferencia de
+constante entre las dos implementaciones por su forma de almacenamiento.
+La dinámica, a cambio, no tiene capacidad fija.
+
+
+====================================================================
+PARTE 4 - UTILIZACIÓN
+====================================================================
+
+Los cuatro métodos (UtilizacionDiccionario.java) reciben la interfaz
+Diccionario y solo usan sus 8 operaciones y las de la Lista que devuelve
+claves(d), así que funcionan sin cambios con DiccionarioEstatico y con
+DiccionarioDinamico (el main los prueba con las dos). Los diccionarios
+resultado se crean como DiccionarioDinamico porque no tienen capacidad
+fija. Ningún método modifica los diccionarios recibidos: solo llaman a
+claves() y obtener().
+
+Para recorrer las claves se usa la Lista con obtener(i) dentro de un for.
+obtener(i) de una Lista dinámica es O(i), porque hay que avanzar i nodos
+desde el primero. Recorrer toda la lista así cuesta 0 + 1 + ... + (n-1) =
+n(n-1)/2, o sea O(n²).
+
+combinarDiccionarios(d1, d2): O(n²), con n = cantidadClaves(d1) +
+cantidadClaves(d2).
+    Por cada una de las n claves de d1 y d2 se hace: obtener(i) en la
+    Lista (O(n)), obtener(clave) en d1 o d2 (O(n)) y definir() en el
+    resultado. definir() es O(n) porque busca la clave en el resultado,
+    que llega a tener hasta n claves. Son n vueltas de un bucle con
+    trabajo O(n) cada una: O(n²). Los dos claves() iniciales son O(n) y
+    no cambian el total. Que gane el valor de d2 sale del propio
+    definir(): las claves de d2 se definen después y reemplazan el valor.
+
+invertir(d): O(n²), con n = cantidadClaves(d).
+    n vueltas; en cada una, obtener(i) en la Lista (O(n)), obtener(clave)
+    en d (O(n)) y definir(valor, clave) en el resultado, que busca entre
+    las hasta n claves ya cargadas (O(n)). Total O(n²).
+
+contarValoresMayoresA(d, umbral): O(n²), con n = cantidadClaves(d).
+    Supuesto: todos los valores de d son enteros.
+    n vueltas; en cada una, obtener(i) en la Lista (O(n)) y obtener(clave)
+    en d (O(n)); la comparación con umbral es O(1). Total O(n²). Aunque
+    cada operación por separado es O(n), repetirla n veces dentro del
+    bucle da O(n²).
+
+clavesOrdenadas(d): O(n²), con n = cantidadClaves(d).
+    - claves(d): O(n).
+    - Copiar las claves a un arreglo de String con obtener(i): O(n²).
+    - Ordenamiento por selección: para cada posición i busca el menor
+      entre las posiciones i..n-1. Son (n-1) + (n-2) + ... + 1 =
+      n(n-1)/2 comparaciones: O(n²).
+    - Armar la Lista resultado con agregar (O(1) cada uno): O(n).
+    El total es O(n²). Aunque la copia fuese O(n), el ordenamiento por
+    selección seguiría siendo O(n²).

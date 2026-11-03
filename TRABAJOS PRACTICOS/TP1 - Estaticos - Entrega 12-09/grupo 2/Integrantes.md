@@ -1,5 +1,6 @@
-* Ignacio Nicolás Papadopulos
-* Joaquina Dias Rato
-* Ignacio Uliczki
-* Forziati Gangi Luca
+* Ayelén Balmaceda
+* Alejo Maggi
+* Juan Ventola
+* Mateo Galli
+* Francisco Medina
 
