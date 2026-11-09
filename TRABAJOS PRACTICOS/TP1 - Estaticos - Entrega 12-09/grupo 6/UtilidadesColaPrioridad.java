@@ -25,16 +25,16 @@ public class UtilidadesColaPrioridad {
 
     public static Cola invertirColaConColaPrioridad(Cola c) {
         ColaPrioridad auxiliar = crear();
-        Cola invertida = new Cola();
+        Cola invertida = new ColaB(c.tamanio());
         int prioridad = 0;
 
         while (!c.esVacia()) {
-            auxiliar.insertar(c.desacolar(), prioridad);
+            auxiliar.insertar(c.desencolar(), prioridad);
             prioridad++;
         }
 
         while (!auxiliar.esVacia()) {
-            invertida.acolar(auxiliar.extraerMax().valor);
+            invertida.encolar(auxiliar.extraerMax().valor);
         }
 
         return invertida;
