@@ -45,6 +45,41 @@ public class Main {
         System.out.println("=== 4.3 caminoMasCorto ===");
         System.out.println("caminoMasCorto(A, F) = " + RecorridosGrafo.caminoMasCorto(grafo, "A", "F"));
         System.out.println("caminoMasCorto(A, G) = " + RecorridosGrafo.caminoMasCorto(grafo, "A", "G"));
+
+        System.out.println();
+        System.out.println("=== Casos borde ===");
+        System.out.println("existeArista(B, A) = " + grafo.existeArista("B", "A"));
+        System.out.println("BFS desde G = " + RecorridosGrafo.bfs(grafo, "G"));
+        System.out.println("estanConectados(A, A) = " + RecorridosGrafo.estanConectados(grafo, "A", "A"));
+        System.out.println("caminoMasCorto(A, A) = " + RecorridosGrafo.caminoMasCorto(grafo, "A", "A"));
+
+        Grafo chico = new Grafo(3);
+        chico.agregarVertice("A");
+        try {
+            chico.agregarVertice("A");
+        } catch (RuntimeException e) {
+            System.out.println("Error esperado: " + e.getMessage());
+        }
+        try {
+            grafo.agregarVertice("H");
+        } catch (RuntimeException e) {
+            System.out.println("Error esperado: " + e.getMessage());
+        }
+        try {
+            grafo.agregarArista("A", "A");
+        } catch (RuntimeException e) {
+            System.out.println("Error esperado: " + e.getMessage());
+        }
+        try {
+            grafo.agregarArista("A", "B");
+        } catch (RuntimeException e) {
+            System.out.println("Error esperado: " + e.getMessage());
+        }
+        try {
+            RecorridosGrafo.bfs(grafo, "Z");
+        } catch (RuntimeException e) {
+            System.out.println("Error esperado: " + e.getMessage());
+        }
     }
 
     private static Grafo crearGrafoEjemplo() {
