@@ -98,9 +98,9 @@ Salida obtenida al ejecutar `Main`:
 Orden de visita = [ A B C D E F ]
 ```
 
-**Complejidad temporal:** O(V²) en el peor caso, donde V es la cantidad de vértices actuales. Cada vértice alcanzable se encola y desencola una sola vez, con costo O(1) por operación. Para cada uno, `vecinosPorIndice` recorre dos veces las V posiciones de su fila de la matriz: O(V). Si se alcanzan todos los vértices, se realizan V consultas de ese costo. La búsqueda inicial del origen con el Diccionario dinámico cuesta O(V), y no cambia el orden total. Se trabaja con los arreglos de índices devueltos por el Grafo para no repetir búsquedas de etiquetas por cada vecino.
+**Complejidad temporal:** O(n²) en el peor caso, donde n es la cantidad de vértices actuales. Cada vértice alcanzable se encola y desencola una sola vez, con costo O(1) por operación. Para cada uno, `vecinosPorIndice` recorre dos veces las n posiciones de su fila de la matriz: O(n). Si se alcanzan todos los vértices, se realizan n consultas de ese costo. La búsqueda inicial del origen con el Diccionario dinámico cuesta O(n), y no cambia el orden total. Se trabaja con los arreglos de índices devueltos por el Grafo para no repetir búsquedas de etiquetas por cada vecino.
 
-**Espacio adicional:** O(V), por las marcas, la cola, el arreglo de vecinos de la consulta actual y la lista devuelta. El espacio de la matriz del grafo ya existía antes de iniciar el recorrido.
+**Espacio adicional:** O(n), por las marcas, la cola, el arreglo de vecinos de la consulta actual y la lista devuelta. El espacio de la matriz del grafo ya existía antes de iniciar el recorrido.
 
 ### 3.2 DFS — Búsqueda en profundidad (recursiva)
 
@@ -119,15 +119,15 @@ Orden de visita = [ A B D F E C ]
 
 **Comparación con BFS:** BFS devuelve A, B, C, D, E, F porque avanza por niveles. DFS devuelve A, B, D, F, E, C porque sigue por un vecino hasta que no puede avanzar más y recién entonces vuelve para continuar por otro. Los dos visitan los mismos vértices alcanzables desde A, sin repetidos, pero en distinto orden.
 
-**Complejidad temporal:** O(V²) en el peor caso, donde V es la cantidad de vértices actuales. Cada vértice alcanzable se procesa una sola vez. La consulta `vecinosPorIndice` cuesta O(V), porque recorre dos veces la fila de la matriz. Si se visitan todos los vértices, se hacen V consultas de ese costo. Marcar y agregar cada etiqueta a la lista cuesta O(1). La búsqueda inicial del origen cuesta O(V) y no cambia el orden total.
+**Complejidad temporal:** O(n²) en el peor caso, donde n es la cantidad de vértices actuales. Cada vértice alcanzable se procesa una sola vez. La consulta `vecinosPorIndice` cuesta O(n), porque recorre dos veces la fila de la matriz. Si se visitan todos los vértices, se hacen n consultas de ese costo. Marcar y agregar cada etiqueta a la lista cuesta O(1). La búsqueda inicial del origen cuesta O(n) y no cambia el orden total.
 
-**Espacio adicional:** las marcas, el resultado y las llamadas recursivas ocupan O(V). Además, cada llamada pendiente conserva su arreglo de vecinos mientras recorre los siguientes. En un grafo denso puede haber O(V) llamadas pendientes con arreglos de O(V) elementos cada una, por lo que esta implementación puede usar O(V²) de espacio adicional en el peor caso.
+**Espacio adicional:** las marcas, el resultado y las llamadas recursivas ocupan O(n). Además, cada llamada pendiente conserva su arreglo de vecinos mientras recorre los siguientes. En un grafo denso puede haber O(n) llamadas pendientes con arreglos de O(n) elementos cada una, por lo que esta implementación puede usar O(n²) de espacio adicional en el peor caso.
 
 ### 3.3 DFS iterativo
 
 Se usa la misma `PilaVarianteA` que ya está en el proyecto, a través de la interfaz `Pila`. El método `dfsIterativo(grafo, origen)` devuelve el orden en una `Lista`, como los otros recorridos. El origen debe pertenecer al grafo y no se modifica el grafo.
 
-Primero se marca y apila el origen. Después se mira el tope y se busca su primer vecino sin visitar. Si hay uno, se marca, se apila y se agrega al resultado. Si no queda ninguno, se desapila ese vértice y se vuelve al anterior. La pila guarda el camino que se está recorriendo, en lugar de usar llamadas recursivas. Cada vértice se apila una sola vez, por eso alcanza con una capacidad de V elementos.
+Primero se marca y apila el origen. Después se mira el tope y se busca su primer vecino sin visitar. Si hay uno, se marca, se apila y se agrega al resultado. Si no queda ninguno, se desapila ese vértice y se vuelve al anterior. La pila guarda el camino que se está recorriendo, en lugar de usar llamadas recursivas. Cada vértice se apila una sola vez, por eso alcanza con una capacidad de n elementos.
 
 Salida desde A sobre el mismo ejemplo:
 
@@ -138,9 +138,9 @@ Orden de visita = [ A B D F E C ]
 
 **Comparación con el recursivo:** en esta versión da exactamente el mismo orden: A, B, D, F, E, C. Se elige el primer vecino sin visitar por índice creciente, igual que en el recursivo, y se termina esa rama antes de seguir con otra. No se apilan todos los vecinos juntos. G tampoco aparece porque está aislado.
 
-**Complejidad temporal:** O(V²) en el peor caso. Cada vuelta del `while` apila un vértice nuevo o desapila uno que ya terminó, así que hay como máximo 2V - 1 vueltas. En cada vuelta se consultan los vecinos del tope, con costo O(V), y se busca uno sin visitar. Aunque se vuelva a consultar un vértice al regresar de una rama, el total sigue siendo O(V²).
+**Complejidad temporal:** O(n²) en el peor caso. Cada vuelta del `while` apila un vértice nuevo o desapila uno que ya terminó, así que hay como máximo 2n - 1 vueltas. En cada vuelta se consultan los vecinos del tope, con costo O(n), y se busca uno sin visitar. Aunque se vuelva a consultar un vértice al regresar de una rama, el total sigue siendo O(n²).
 
-**Espacio adicional:** O(V), por la pila, las marcas, la lista de resultado y el arreglo de vecinos de la vuelta actual. No hay llamadas recursivas.
+**Espacio adicional:** O(n), por la pila, las marcas, la lista de resultado y el arreglo de vecinos de la vuelta actual. No hay llamadas recursivas.
 
 ## Parte 4 — Utilización
 
@@ -162,7 +162,7 @@ estanConectados(A, G) = false
 
 A y F están conectados por el camino A–B–D–F. G está aislado, así que ningún recorrido desde A llega a él.
 
-**Complejidad temporal:** O(V²) en el peor caso, que es cuando v2 no es alcanzable o se encuentra al final. Cada vértice se encola y desencola a lo sumo una vez, y por cada vértice desencolado `vecinosPorIndice` recorre su fila de la matriz, con costo O(V). Las dos búsquedas iniciales en el Diccionario cuestan O(V) y no cambian el orden total. Con listas de adyacencia, el mismo recorrido costaría O(V + E).
+**Complejidad temporal:** O(n²) en el peor caso, que es cuando v2 no es alcanzable o se encuentra al final. Cada vértice se encola y desencola a lo sumo una vez, y por cada vértice desencolado `vecinosPorIndice` recorre su fila de la matriz, con costo O(n). Las dos búsquedas iniciales en el Diccionario cuestan O(n) y no cambian el orden total. Con listas de adyacencia, el mismo recorrido costaría O(n + m).
 
 ### 4.2 componentesConexas(g)
 
@@ -177,7 +177,7 @@ Salida obtenida al ejecutar `Main`:
 componentesConexas = 2
 ```
 
-**Complejidad temporal:** O(V²). Entre todos los BFS, cada vértice se encola y desencola una sola vez, y por cada uno se consulta `vecinosPorIndice` con costo O(V). Además, cada componente crea una cola nueva de capacidad V, que cuesta O(V); como hay a lo sumo V componentes, eso también queda en O(V²). Con listas de adyacencia, el recorrido completo costaría O(V + E).
+**Complejidad temporal:** O(n²). Entre todos los BFS, cada vértice se encola y desencola una sola vez, y por cada uno se consulta `vecinosPorIndice` con costo O(n). Además, cada componente crea una cola nueva de capacidad n, que cuesta O(n); como hay a lo sumo n componentes, eso también queda en O(n²). Con listas de adyacencia, el recorrido completo costaría O(n + m).
 
 ### 4.3 caminoMasCorto(g, origen, destino)
 
@@ -195,5 +195,5 @@ caminoMasCorto(A, G) = -1
 
 El camino más corto de A a F es A–B–D–F, con 3 aristas. Para G devuelve -1 porque no hay camino.
 
-**Complejidad temporal:** O(V²) en el peor caso, por el mismo motivo que en 4.1: cada vértice se encola a lo sumo una vez y por cada uno se recorre su fila de la matriz. Actualizar la distancia de cada vecino cuesta O(1). Con listas de adyacencia costaría O(V + E).
+**Complejidad temporal:** O(n²) en el peor caso, por el mismo motivo que en 4.1: cada vértice se encola a lo sumo una vez y por cada uno se recorre su fila de la matriz. Actualizar la distancia de cada vecino cuesta O(1). Con listas de adyacencia costaría O(n + m).
 
