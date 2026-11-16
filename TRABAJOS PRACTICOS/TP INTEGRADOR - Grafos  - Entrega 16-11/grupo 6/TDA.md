@@ -2,7 +2,7 @@
 
 **Dominio:** grafo no dirigido y no pesado (las aristas no tienen sentido ni peso). Cada vértice se identifica con una etiqueta única. El grafo tiene una capacidad máxima de n vértices, fijada al crearlo.
 
-## crear(n) -> Grafo
+## crear(n: entero) -> Grafo
 - **Pre:** n > 0 (si no, devolver error)
 - **Post:** devuelve grafo vacío con capacidad para n vértices.
 
@@ -12,7 +12,7 @@
 
 ## agregarArista(g: Grafo, v1, v2) -> Grafo
 - **Pre:** debe existir un grafo al cual agregar arista, no debe pre-existir una arista entre v1-v2, v1 y v2 deben pertenecer al mismo grafo, v1 debe ser distinto de v2. Si no se cumple alguna, devolver error.
-- **Post:** devuelve el grafo con una arista entre los vértices v1 y v2; ambos sentidos son válidos.
+- **Post:** devuelve el grafo con una arista entre los vértices v1 y v2: existeArista(g, v1, v2) = existeArista(g, v2, v1) = true.
 
 ## existeArista(g: Grafo, v1, v2) -> boolean
 - **Pre:** existe el grafo, v1 y v2 pertenecen a él (devolver error).

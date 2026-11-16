@@ -1,3 +1,45 @@
+## Parte 1 — Especificación del TDA Grafo
+
+**Dominio:** grafo no dirigido y no pesado (las aristas no tienen sentido ni peso). Cada vértice se identifica con una etiqueta única. El grafo tiene una capacidad máxima de n vértices, fijada al crearlo.
+
+### crear(n: entero) -> Grafo
+- **Pre:** n > 0 (si no, devolver error)
+- **Post:** devuelve grafo vacío con capacidad para n vértices.
+
+### agregarVertice(g: Grafo, etiqueta) -> Grafo
+- **Pre:** debe existir un grafo al cual agregar vértices, no debe superar la capacidad del grafo (devolver error), la etiqueta no puede ser nula (devolver error), la etiqueta no debe existir en el grafo (devolver error)
+- **Post:** devuelve el grafo con un nuevo vértice identificado por etiqueta; cantidadVertices(g) aumenta en 1.
+
+### agregarArista(g: Grafo, v1, v2) -> Grafo
+- **Pre:** debe existir un grafo al cual agregar arista, no debe pre-existir una arista entre v1-v2, v1 y v2 deben pertenecer al mismo grafo, v1 debe ser distinto de v2. Si no se cumple alguna, devolver error.
+- **Post:** devuelve el grafo con una arista entre los vértices v1 y v2: existeArista(g, v1, v2) = existeArista(g, v2, v1) = true.
+
+### existeArista(g: Grafo, v1, v2) -> boolean
+- **Pre:** existe el grafo, v1 y v2 pertenecen a él (devolver error).
+- **Post:** devuelve true si existe una arista entre v1 y v2, caso contrario false. Si v1 es igual a v2 devuelve false, porque no se permiten aristas de un vértice consigo mismo.
+
+### vecinos(g: Grafo, v) -> conjunto (lista de etiquetas)
+- **Pre:** existe el grafo, v pertenece al grafo (si no, devolver error)
+- **Post:** devuelve una lista con las etiquetas de los vértices adyacentes a v, sin repetidos. Si v no tiene aristas, la lista es vacía.
+
+### cantidadVertices(g: Grafo) -> entero
+- **Pre:** existe el grafo
+- **Post:** devuelve la cantidad de vértices actuales de g.
+
+**Operaciones auxiliares para los recorridos:**
+
+### indiceDe(g: Grafo, etiqueta) -> entero
+- **Pre:** existe el grafo, la etiqueta pertenece al grafo (si no, devolver error).
+- **Post:** devuelve el índice del vértice identificado por etiqueta. No modifica el grafo.
+
+### etiquetaDe(g: Grafo, indice: entero) -> etiqueta
+- **Pre:** existe el grafo, 0 <= indice < cantidadVertices(g) (si no, devolver error).
+- **Post:** devuelve la etiqueta del vértice que tiene ese índice. No modifica el grafo.
+
+### vecinosPorIndice(g: Grafo, indice: entero) -> arreglo de enteros
+- **Pre:** existe el grafo, 0 <= indice < cantidadVertices(g) (si no, devolver error).
+- **Post:** devuelve un arreglo nuevo con los índices de los vecinos, sin repetidos y en orden creciente. Si no hay vecinos devuelve un arreglo vacío. No modifica el grafo.
+
 ## Parte 2 — Implementación
 
 El grafo se implementa con una matriz de adyacencia `boolean[n][n]`, donde `n` es la capacidad indicada en `crear(n)`. La posición `[i][j]` vale `true` si hay una arista entre el vértice de índice `i` y el de índice `j`. Como el grafo es no dirigido, `agregarArista` escribe `[i][j]` y `[j][i]`, así que la matriz siempre queda simétrica.
@@ -100,18 +142,58 @@ Orden de visita = [ A B D F E C ]
 
 **Espacio adicional:** O(V), por la pila, las marcas, la lista de resultado y el arreglo de vecinos de la vuelta actual. No hay llamadas recursivas.
 
+## Parte 4 — Utilización
 
-### 4 Análisis de complejidad
+Los tres métodos están en `RecorridosGrafo` y se prueban en `Main` sobre el mismo grafo de ejemplo de la Parte 3. Los tres recorren el grafo con BFS, usando `ColaCircular` a través de la interfaz `Cola`, y solo usan métodos públicos del Grafo. Ninguno modifica el grafo.
+
+### 4.1 estanConectados(g, v1, v2)
+
+Se hace un BFS desde v1. Si en algún momento se desencola v2, devuelve true; si la cola se vacía sin encontrarlo, devuelve false.
+
+Se eligió BFS porque recorre el grafo por niveles; sin embargo, como el objetivo es solo verificar si existe algún camino entre dos vértices, DFS y BFS son indistintos: ambos recorren el mismo conjunto de vértices alcanzables desde el origen y, si v2 pertenece a esa región, devuelve verdadero; si no, devuelve falso.
+
+Salida obtenida al ejecutar `Main`:
+
 ```text
-4.1 Se eligió BFS porque recorre el grafo por niveles; sin embargo, como el objetivo es solo verificar si existe algún camino entre dos vértices, DFS y BFS son indistintos: ambos recorren el mismo conjunto de nodos alcanzables desde el origen y, si v2 pertenece a esa región, devuelve verdadero; si no, devuelve falso.
+=== 4.1 estanConectados ===
+estanConectados(A, F) = true
+estanConectados(A, G) = false
 ```
+
+A y F están conectados por el camino A–B–D–F. G está aislado, así que ningún recorrido desde A llega a él.
+
+**Complejidad temporal:** O(V²) en el peor caso, que es cuando v2 no es alcanzable o se encuentra al final. Cada vértice se encola y desencola a lo sumo una vez, y por cada vértice desencolado `vecinosPorIndice` recorre su fila de la matriz, con costo O(V). Las dos búsquedas iniciales en el Diccionario cuestan O(V) y no cambian el orden total. Con listas de adyacencia, el mismo recorrido costaría O(V + E).
+
+### 4.2 componentesConexas(g)
+
+Se recorren los vértices por índice. Cada vez que aparece uno todavía no visitado, empieza una componente nueva: se suma 1 y se hace un BFS desde ese vértice, que marca como visitados a todos los de su componente. Las marcas se comparten entre todos los BFS, así que cada vértice se cuenta en una sola componente.
+
+En el ejemplo, el BFS que arranca en A marca A, B, C, D, E y F. El siguiente vértice sin visitar es G, que forma una segunda componente él solo.
+
+Salida obtenida al ejecutar `Main`:
+
 ```text
- 4.3 Se utiliza BFS porque el grafo es no pesado, es decir, todas las aristas tienen igual costo. BFS recorre los vértices en orden creciente de distancia desde el origen. Por lo tanto, cuando se descubre el destino por primera vez, ya se obtuvo la ruta con menor número de aristas. Si no llega a encontrarse, entonces no existe camino entre ambos vértices.
+=== 4.2 componentesConexas ===
+componentesConexas = 2
 ```
-**estanConectados:** O(V + E) en teoría; con esta implementación de matriz de adyacencia, el costo práctica es O(V^2).
 
-**componentesConexas:** idem O(V + E) / O(V^2) con matriz.
+**Complejidad temporal:** O(V²). Entre todos los BFS, cada vértice se encola y desencola una sola vez, y por cada uno se consulta `vecinosPorIndice` con costo O(V). Además, cada componente crea una cola nueva de capacidad V, que cuesta O(V); como hay a lo sumo V componentes, eso también queda en O(V²). Con listas de adyacencia, el recorrido completo costaría O(V + E).
 
-**caminoMasCorto:** O(V + E) / O(V^2) con matriz.
+### 4.3 caminoMasCorto(g, origen, destino)
 
+Se hace un BFS desde el origen con un arreglo `distancia`: el origen tiene distancia 0 y cada vecino que se encola recibe la distancia del vértice actual más 1. Cuando se desencola el destino, se devuelve su distancia. Si la cola se vacía sin encontrarlo, devuelve -1 para indicar que no existe camino.
+
+Se utiliza BFS porque el grafo es no pesado, es decir, todas las aristas tienen igual costo. BFS recorre los vértices en orden creciente de distancia desde el origen. Por lo tanto, cuando se desencola el destino, ya se obtuvo la ruta con menor número de aristas. Si no llega a encontrarse, entonces no existe camino entre ambos vértices.
+
+Salida obtenida al ejecutar `Main`:
+
+```text
+=== 4.3 caminoMasCorto ===
+caminoMasCorto(A, F) = 3
+caminoMasCorto(A, G) = -1
+```
+
+El camino más corto de A a F es A–B–D–F, con 3 aristas. Para G devuelve -1 porque no hay camino.
+
+**Complejidad temporal:** O(V²) en el peor caso, por el mismo motivo que en 4.1: cada vértice se encola a lo sumo una vez y por cada uno se recorre su fila de la matriz. Actualizar la distancia de cada vecino cuesta O(1). Con listas de adyacencia costaría O(V + E).
 

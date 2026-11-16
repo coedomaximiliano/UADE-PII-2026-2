@@ -17,7 +17,6 @@ public class RecorridosGrafo {
             for (int i = 0; i < vecinos.length; i++) {
                 int vecino = vecinos[i];
                 if (!visitados[vecino]) {
-                    // Se marca al encolar para que no quede pendiente dos veces.
                     visitados[vecino] = true;
                     pendientes.encolar(vecino);
                 }

@@ -14,6 +14,8 @@ public class Main {
 
         System.out.println();
         System.out.println("G esta aislado = " + grafo.vecinos("G").esVacia());
+        System.out.println("existeArista(A, B) = " + grafo.existeArista("A", "B"));
+        System.out.println("existeArista(A, D) = " + grafo.existeArista("A", "D"));
 
         System.out.println();
         System.out.println("=== 3.1 BFS desde A ===");
@@ -31,10 +33,16 @@ public class Main {
         System.out.println("Orden de visita = " + recorridoIterativo);
 
         System.out.println();
-        System.out.println("=== Parte 4 - Utilizacion ===");
+        System.out.println("=== 4.1 estanConectados ===");
         System.out.println("estanConectados(A, F) = " + RecorridosGrafo.estanConectados(grafo, "A", "F"));
         System.out.println("estanConectados(A, G) = " + RecorridosGrafo.estanConectados(grafo, "A", "G"));
+
+        System.out.println();
+        System.out.println("=== 4.2 componentesConexas ===");
         System.out.println("componentesConexas = " + RecorridosGrafo.componentesConexas(grafo));
+
+        System.out.println();
+        System.out.println("=== 4.3 caminoMasCorto ===");
         System.out.println("caminoMasCorto(A, F) = " + RecorridosGrafo.caminoMasCorto(grafo, "A", "F"));
         System.out.println("caminoMasCorto(A, G) = " + RecorridosGrafo.caminoMasCorto(grafo, "A", "G"));
     }
