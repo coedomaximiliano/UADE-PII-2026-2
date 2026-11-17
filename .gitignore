@@ -1,0 +1,25 @@
+# --- Exámenes: enunciados, resoluciones y entregas de alumnos (no publicar) ---
+# Git en Windows compara sin distinguir mayúsculas (core.ignorecase=true).
+**/*parcial*/
+**/*recuperatorio*/
+**/*examen*/
+**/*final adelantado*/
+**/*parcial*.docx
+**/*parcial*.pdf
+**/*examen*.docx
+**/*examen*.pdf
+# Los simulacros se comparten con los alumnos: no se ignoran
+!**/*simulacro*/
+!**/*simulacro*
+!**/*simulagro*
+# Notas y planillas de corrección
+**/Notas_*.xlsx
+**/Estado_TPs_*.xlsx
+
+# --- Resoluciones de los TPs (sólo la del docente, en la raíz de cada TP;
+#     las entregas de los grupos en "grupo N/" no se ignoran) ---
+TRABAJOS PRACTICOS/*/*resolucion*
+TRABAJOS PRACTICOS/*/*resolución*
+TRABAJOS PRACTICOS/*/*resuelto*
+TRABAJOS PRACTICOS/*/*solucion*
+TRABAJOS PRACTICOS/SOLUCIONES*/
